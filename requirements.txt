@@ -1,2 +1,1 @@
-git+https://github.com/xivo-pbx/xivo-lib-python.git
 pyyaml==3.10
