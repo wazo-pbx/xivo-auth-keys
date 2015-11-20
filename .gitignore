@@ -1,0 +1,7 @@
+*.egg-info
+*.pyc
+*.swp
+.tox
+dist
+build
+integration_tests/assets/*/logs/

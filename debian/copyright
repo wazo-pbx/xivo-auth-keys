@@ -1,0 +1,7 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/ 
+Upstream-Name: xivo-auth-keys
+Source: https://github.com/xivo-pbx/xivo-auth-keys
+
+Files: *
+Copyright: 2015 Avencall
+License: GPL-3.0+
