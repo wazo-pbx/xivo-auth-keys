@@ -15,19 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+import argparse
 import os
 import uuid
 import yaml
 
 
-def main():
+def main(argv):
+    service_id = _parse_cli_args(argv).service_id
     key_updater = _KeyUpdater()
-    services = ['xivo-agid',
-                'xivo-dird-phoned']
 
     os.umask(027)
-    for service in services:
-        key_updater.update(service)
+    key_updater.update(service_id)
 
 
 class _KeyUpdater(object):
@@ -51,3 +50,10 @@ class _KeyUpdater(object):
         with open(filename, 'w') as fobj:
             yaml.safe_dump({'service_id': service_id,
                             'service_key': service_key}, fobj)
+
+
+def _parse_cli_args(argv):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('service_id',
+                        help="The id of the service for which the key will be generated")
+    return parser.parse_args(argv)

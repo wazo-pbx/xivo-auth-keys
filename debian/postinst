@@ -4,7 +4,8 @@ set -e
 
 case "$1" in
     configure)
-        xivo-update-keys
+        xivo-update-keys xivo-dird-phoned
+        xivo-update-keys xivo-agid
     ;;
 
     abort-upgrade)
