@@ -32,15 +32,22 @@ def main():
 
 class _KeyUpdater(object):
 
-    def update(self, name):
-        key = self._generate_key()
-        self._write_config_file(name, key)
+    def __init__(self):
+        self.filename = '/var/lib/xivo-auth-keys/{service_id}-key.yml'
+
+    def update(self, service_id):
+        filename = self.filename.format(service_id=service_id)
+        if not self._is_file_exist(filename):
+            service_key = self._generate_key()
+            self._write_config_file(filename, service_id, service_key)
 
     def _generate_key(self):
         return str(uuid.uuid4())
 
-    def _write_config_file(self, name, key):
-        filename = '/var/lib/xivo-auth-keys/{}-key.yml'.format(name)
+    def _is_file_exist(self, filename):
+        return os.path.isfile(filename)
+
+    def _write_config_file(self, filename, service_id, service_key):
         with open(filename, 'w') as fobj:
-            yaml.safe_dump({'service_id': name,
-                            'service_key': key}, fobj)
+            yaml.safe_dump({'service_id': service_id,
+                            'service_key': service_key}, fobj)
