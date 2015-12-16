@@ -7,6 +7,7 @@ case "$1" in
         xivo-update-keys xivo-agentd-cli
         xivo-update-keys xivo-agid
         xivo-update-keys xivo-ctid
+        xivo-update-keys xivo-ctid-ng
         xivo-update-keys xivo-dird-phoned
     ;;
 
