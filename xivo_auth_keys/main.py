@@ -22,14 +22,19 @@ import xivo_dao
 from xivo_dao.helpers.db_utils import session_scope
 from xivo_dao.accesswebservice_dao import get_services
 
+KEYS_PATH = '/var/lib/xivo-auth-keys'
+
 
 def main():
     xivo_dao.init_db_from_config()
     key_updater = _KeyUpdater()
 
     os.umask(027)
+    generated_files = []
     for service in _get_services():
-        key_updater.update(service.login, service.passwd)
+        generated_files.append(key_updater.update(service.login, service.passwd))
+
+    _clean_directory(generated_files)
 
 
 def _get_services():
@@ -37,13 +42,22 @@ def _get_services():
         return get_services()
 
 
+def _clean_directory(generated_files):
+    directory_files = os.listdir(KEYS_PATH)
+    for filename in directory_files:
+        full_path = os.path.join(KEYS_PATH, filename)
+        if full_path not in generated_files:
+            os.remove(full_path)
+
+
 class _KeyUpdater(object):
 
-    filename = '/var/lib/xivo-auth-keys/{service_id}-key.yml'
+    filename = os.path.join(KEYS_PATH, '{service_id}-key.yml')
 
     def update(self, service_id, service_key):
         filename = self.filename.format(service_id=service_id)
         self._write_config_file(filename, service_id, service_key)
+        return filename
 
     def _write_config_file(self, filename, service_id, service_key):
         with open(filename, 'w') as fobj:
