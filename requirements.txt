@@ -1,1 +1,2 @@
 pyyaml==3.10
+git+https://github.com/xivo-pbx/xivo-dao.git
