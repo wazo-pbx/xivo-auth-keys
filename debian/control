@@ -13,7 +13,7 @@ Architecture: all
 Depends: ${python:Depends},
          ${misc:Depends},
          python-yaml,
-         xivo-libdao
+         xivo-libdao (>= 16.01~)
 Description: XiVO keys manager for xivo-auth
  XIVO is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
