@@ -26,10 +26,10 @@ setup(
 
     description='XiVO auth keys',
 
-    author='Avencall',
-    author_email='dev@avencall.com',
+    author='Wazo Authors',
+    author_email='dev.wazo@gmail.com',
 
-    url='http://www.xivo.io/',
+    url='http://wazo.community',
 
     packages=find_packages(),
 
