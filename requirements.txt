@@ -1,2 +1,2 @@
-pyyaml==3.11
 git+https://github.com/wazo-pbx/xivo-dao.git
+pyyaml==3.12
