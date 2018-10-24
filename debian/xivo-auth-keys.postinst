@@ -6,7 +6,7 @@ set -e
 
 case "$1" in
 	configure)
-		xivo-update-keys
+		xivo-update-keys 2>/dev/null || true
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)
